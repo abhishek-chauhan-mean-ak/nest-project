@@ -1,5 +1,5 @@
 import { ConflictException, Injectable } from '@nestjs/common';
-import { RegisterDto } from 'src/auth/dto/registerUser.dto';
+import { RegisterDto, SignInDto } from 'src/auth/dto/registerUser.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from 'src/auth/schemas/user.schema';
 import { Model } from 'mongoose';
@@ -20,6 +20,14 @@ export class UserService {
             if(e.code === 11000){
                 throw new ConflictException('Email is already taken.');
             }
+            throw error;
+        }
+    }
+
+    async getUser(signInDto: SignInDto) {
+        try {
+            return await this.userModel.findOne( { email: signInDto.email });
+        } catch (error) {
             throw error;
         }
     }
