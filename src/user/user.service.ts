@@ -31,4 +31,12 @@ export class UserService {
             throw error;
         }
     }
+
+    async getUserById(userId: string) {
+        try {
+            return await this.userModel.findById(userId, { password: 0, __v: 0 });
+        } catch (error) {
+            throw error;
+        }
+    }
 }

@@ -44,6 +44,18 @@ export class AuthService {
     return { accessToken: token };
   }
 
+  // getb user profile
+  async getUserProfile(userId: string){
+    // check for user exist
+    const getUser = await this.userService.getUserById(userId);
+
+    if(!getUser){
+      throw new NotFoundException(`User not found`);
+    }
+
+    return getUser;
+  }
+
   // Generate JWT token
   async generateToken(jwtObj: JwtDto){
     const payload = { sub:  jwtObj.id };
