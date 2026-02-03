@@ -12,16 +12,20 @@ export class RegisterDto {
 
     @IsString() @IsNotEmpty()
     password: string;
+
+    @IsString() @IsNotEmpty()
+    role: string;
 }
 
 export class SignInDto {
     @IsEmail()
-    email: string
+    email: string;
 
     @IsString() @IsNotEmpty()
-    password: string
+    password: string;
 }
 
 export class JwtDto {
-    id: object
+    id: object;
+    role: string;
 }

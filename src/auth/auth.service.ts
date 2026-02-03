@@ -16,7 +16,7 @@ export class AuthService {
     const user = await this.userService.createUser({ ...registerDto, password: hashPassword });
 
     // Generate JWT token
-    const token = await this.generateToken({ id: user._id })
+    const token = await this.generateToken({ id: user._id, role: user.role })
     console.log('token', token);
     return { accessToken: token };
   }
@@ -39,7 +39,7 @@ export class AuthService {
     }
 
     // Generate JWT token
-    const token = await this.generateToken({ id: getUser._id });
+    const token = await this.generateToken({ id: getUser._id, role: getUser.role });
     console.log('token', token);
     return { accessToken: token };
   }
@@ -58,7 +58,7 @@ export class AuthService {
 
   // Generate JWT token
   async generateToken(jwtObj: JwtDto){
-    const payload = { sub:  jwtObj.id };
+    const payload = { sub:  jwtObj.id, role: jwtObj.role };
     return await this.jwtService.signAsync(payload);
   }
 

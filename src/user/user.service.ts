@@ -13,7 +13,8 @@ export class UserService {
                 firstName: registerDto.firstName,
                 lastName: registerDto.lastName,
                 email: registerDto.email,
-                password: registerDto.password
+                password: registerDto.password,
+                role: registerDto?.role
             });
         } catch (error: unknown) {
             const e = error as { code?: number };
